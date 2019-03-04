@@ -1,8 +1,5 @@
 import pandas as pd
 
-import plotly.plotly as py
-import plotly.graph_objs as go
-
 from sklearn import preprocessing, tree
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 from sklearn.neighbors import KNeighborsClassifier
