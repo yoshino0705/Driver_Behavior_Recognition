@@ -17,6 +17,9 @@ The default models are:
 - AdaBoost
 - Naive Bayes
 
+# Acknowledgements
 The models are provided by the Python Sci-kit Learning Packages
+
+This project evaluates and ranks features within the dataset using https://github.com/WillKoehrsen/feature-selector
 
 The dataset used is from this research paper: https://arxiv.org/abs/1704.05223
