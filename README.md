@@ -18,7 +18,7 @@ The default models are:
 - Naive Bayes
 
 # Acknowledgements
-The models are provided by the Python Sci-kit Learning Packages
+The models are provided by the Python Sci-kit Learn Packages
 
 This project evaluates and ranks features within the dataset using https://github.com/WillKoehrsen/feature-selector
 
