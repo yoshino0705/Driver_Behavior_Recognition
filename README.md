@@ -17,6 +17,11 @@ The default models are:
 - AdaBoost
 - Naive Bayes
 
+# Dataset
+The dataset used is from this research paper: https://arxiv.org/abs/1704.05223
+Data are collected using On Board Diagnostics 2 (OBD-II) from In-vehicle Controller Area Network protocol(CAN bus)
+
+
 # Results
 
 [Test Accuracies on Nine Models](https://plot.ly/~yoshino0705/15)
@@ -27,5 +32,3 @@ The default models are:
 The models are provided by the Python Sci-kit Learn Packages
 
 This project evaluates and ranks features within the dataset using https://github.com/WillKoehrsen/feature-selector
-
-The dataset used is from this research paper: https://arxiv.org/abs/1704.05223
