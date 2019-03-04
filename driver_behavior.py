@@ -65,7 +65,7 @@ class DriverBehavior:
         self.train_data = {'X':_X_train, 'y': _y_train}
         self.test_data = {'X':_X_test, 'y': _y_test}
     
-    def train(self, model_name='decision_tree', selected_features=None, random_state=None):
+    def train(self, model_name='decision_tree', selected_features=None):
         if model_name in self.models:
             self.__current_model = model_name
             
@@ -77,56 +77,64 @@ class DriverBehavior:
             
             _X_train = self.train_data['X']
             if selected_features:
-                _X_train = _X_train[selected_features]
+                _X_train = _X_train[:, selected_features]
             
             _y_train = self.train_data['y']
             
             self.models[model_name].fit(_X_train, _y_train)            
             
-    def train_accuracy(self, force_update=False, select_model=None):
+    def train_accuracy(self, force_update=False, selected_features=None, select_model=None):
         predictions = {}
         accuracies = {}
+        
+        _X_train = self.train_data['X']
+        if selected_features:
+            _X_train = _X_train[:, selected_features]
         
         if force_update or not self.__current_model:
             for name, classifier in self.models.items():
                 if self.__fitted[name]:
-                    predictions[name] = classifier.predict(self.train_data['X'])
+                    predictions[name] = classifier.predict(_X_train)
             for name, pred in predictions.items():
                 accuracies[name] = accuracy_score(self.train_data['y'], pred, normalize=True)
             self.__train_accuracies = accuracies
             
         elif select_model is not None and select_model in self.models.keys():
-            predictions = self.models[select_model].predict(self.train_data['X'])
+            predictions = self.models[select_model].predict(_X_train)
             accuracies = accuracy_score(self.train_data['y'], predictions, normalize=True)
             self.__train_accuracies[select_model] = accuracies
             
         else:
-            predictions = self.models[self.__current_model].predict(self.train_data['X'])
+            predictions = self.models[self.__current_model].predict(_X_train)
             accuracies = accuracy_score(self.train_data['y'], predictions, normalize=True)
             self.__train_accuracies[self.__current_model] = accuracies
         
         return self.__train_accuracies
     
-    def test_accuracy(self, force_update=False, select_model=None):
+    def test_accuracy(self, force_update=False, selected_features=None, select_model=None):
         predictions = {}
         accuracies = {}
+        
+        _X_test = self.test_data['X']
+        if selected_features:
+            _X_test = _X_test[:, selected_features]
         
         if force_update or not self.__current_model:
             for name, classifier in self.models.items():
                 if self.__fitted[name]:
-                    predictions[name] = classifier.predict(self.test_data['X'])
+                    predictions[name] = classifier.predict(_X_test)
 
             for name, pred in predictions.items():
                 accuracies[name] = accuracy_score(self.test_data['y'], pred, normalize=True)
             self.__test_accuracies = accuracies
         
         elif select_model is not None and select_model in self.models.keys():
-            predictions = self.models[select_model].predict(self.test_data['X'])
+            predictions = self.models[select_model].predict(_X_test)
             accuracies = accuracy_score(self.test_data['y'], predictions, normalize=True)
             self.__test_accuracies[select_model] = accuracies
         
         else:
-            predictions = self.models[self.__current_model].predict(self.test_data['X'])
+            predictions = self.models[self.__current_model].predict(_X_test)
             accuracies = accuracy_score(self.test_data['y'], predictions, normalize=True)
             self.__test_accuracies[self.__current_model] = accuracies
         
