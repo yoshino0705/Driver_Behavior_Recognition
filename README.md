@@ -19,9 +19,9 @@ The default models are:
 
 # Results
 
-[Test Accuracies on Nine Models] (https://plot.ly/~yoshino0705/15)
+- [Test Accuracies on Nine Models] (https://plot.ly/~yoshino0705/15)
 
-[Train and Test Accuracies on Nine Models] (https://plot.ly/~yoshino0705/13)
+- [Train and Test Accuracies on Nine Models] (https://plot.ly/~yoshino0705/13)
 
 # Acknowledgements
 The models are provided by the Python Sci-kit Learn Packages
